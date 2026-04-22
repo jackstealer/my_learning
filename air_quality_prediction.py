@@ -2,14 +2,6 @@
 Optimized Air Quality Index (AQI) Prediction Pipeline
 Dataset: 12_air_quality.csv
 Target: AQI prediction using air quality and environmental features
-
-Key Improvements:
-- Robust outlier detection with multiple methods
-- Advanced feature engineering with domain knowledge
-- Feature selection using multiple techniques
-- Ensemble model comparison
-- Proper validation strategy to prevent data leakage
-- Residual analysis and model diagnostics
 """
 
 import pandas as pd
