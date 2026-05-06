@@ -69,23 +69,38 @@ test_ds=test_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
 
 model=models.Sequential([
-    layers.Conv2D(32,(3,3),activation="relu",input_shape=(128,128,3)),
-    layers.MaxPooling2D(),
+    layers.Conv2D(filters=64, kernel_size=(3,3), padding='same', activation='relu', input_shape=(128,128,3)),
+    layers.Conv2D(filters=64, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.MaxPool2D(pool_size=(2,2)),
 
-    layers.Conv2D(32,(3,3),activation="relu"),
-    layers.MaxPooling2D(),
+    layers.Conv2D(filters=128, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.Conv2D(filters=128, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.MaxPool2D(pool_size=(2,2)),
 
-    layers.Conv2D(32,(3,3),activation="relu"),
-    layers.MaxPooling2D(),
+
+    layers.Conv2D(filters=256, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.Conv2D(filters=256, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.MaxPool2D(pool_size=(2,2)),
+
+
+    layers.Conv2D(filters=512, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.Conv2D(filters=512, kernel_size=(3,3), padding='same', activation='relu'),
+    layers.MaxPool2D(pool_size=(2,2)),
+
 
     layers.Flatten(),
 
-    layers.Dense(128,activation="relu"),
+    layers.Dense(units=4096, activation='relu'),
     layers.Dropout(0.5),
 
-    layers.Dense(len(class_name),activation="softmax")
+    layers.Dense(units=4096, activation='relu'),
+    layers.Dropout(0.5),
+
+    layers.Dense(len(class_name), activation='softmax')
+
+
+
 ])
-model.summary()
 
 plot_model(model,to_file='model_arch.png',show_shapes=True,show_layer_names=True)
 
@@ -100,3 +115,13 @@ history=model.fit(
     validation_data=vali_ds,
     epochs=EPOCHS
 )
+loss, acc=model.evaluate(test_ds)
+print("Test accuracy: ",acc)
+#PLot model accuracy
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Validation'], loc='upper left')
+plt.show()
