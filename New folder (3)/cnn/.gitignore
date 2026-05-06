@@ -1,0 +1,9 @@
+# Ignore datasets
+dataset/
+cifar10_dataset/
+*.zip
+
+# Ignore model files
+*.h5
+*.pkl
+model_arch.png
