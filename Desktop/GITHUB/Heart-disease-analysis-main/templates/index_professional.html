@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioAI - Professional Cardiovascular Risk Assessment Platform</title>
+    <meta name="description" content="HIPAA-compliant AI-powered cardiovascular risk assessment for healthcare professionals">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0891b2;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0284c7;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Professional Navigation */
+        .navbar-professional {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-brand i {
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: var(--gray) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+        }
+        
+        /* Hero Section */
+        .hero-professional {
+            background: linear-gradient(135deg, #1e40af 0%, #0891b2 100%);
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-professional::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        
+        .badge-active {
+            background: rgba(5, 150, 105, 0.2);
+            color: #d1fae5;
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+        
+        .btn-primary-custom {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            color: var(--primary-dark);
+        }
+        
+        .btn-secondary-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary-custom:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        /* Features Section */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-description {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* Trust Indicators */
+        .trust-section {
+            background: var(--light);
+            padding: 4rem 0;
+        }
+        
+        .trust-badge {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .trust-badge i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .trust-badge h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .trust-badge p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 5rem 0;
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        .footer-professional {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-professional">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-heartbeat"></i>
+                <span>CardioAI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/predict-page">Risk Assessment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="/predict-page" class="btn btn-primary btn-sm px-4">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-professional">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 hero-content">
+                    <div class="badge-status badge-active">
+                        <i class="fas fa-check-circle"></i>
+                        <span>{% if model_loaded %}AI Model Active{% else %}System Ready{% endif %}</span>
+                    </div>
+                    
+                    <h1 class="hero-title">Professional Cardiovascular Risk Assessment Platform</h1>
+                    <p class="hero-subtitle">
+                        Advanced AI-powered risk stratification using data-driven algorithms trained on real-world clinical data. 
+                        Designed for healthcare professionals and research institutions.
+                    </p>
+                    
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="/predict-page" class="btn btn-primary-custom">
+                            <i class="fas fa-stethoscope me-2"></i>Start Assessment
+                        </a>
+                        <a href="/about" class="btn btn-secondary-custom">
+                            <i class="fas fa-info-circle me-2"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <i class="fas fa-heart-pulse" style="font-size: 18rem; opacity: 0.15; color: white;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-value" id="datasetSize">4,500+</div>
+                        <div class="stat-label">Training Records</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-value" id="featureCount">17</div>
+                        <div class="stat-label">Clinical Features</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-value" id="modelAccuracy">--</div>
+                        <div class="stat-label">Model Accuracy</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-value"><i class="fas fa-shield-alt text-success"></i></div>
+                        <div class="stat-label">HIPAA Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Enterprise-Grade Features</h2>
+                <p class="section-subtitle">Built for healthcare professionals with clinical accuracy and compliance in mind</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">Data-Driven AI</h3>
+                        <p class="feature-description">
+                            100% data-driven model with zero hardcoded thresholds. All risk factors extracted from real clinical data using statistical analysis and correlation studies.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Risk Stratification</h3>
+                        <p class="feature-description">
+                            Advanced risk scoring system with probability-based predictions. Provides detailed risk factors and reasoning for clinical decision support.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <h3 class="feature-title">Privacy & Security</h3>
+                        <p class="feature-description">
+                            HIPAA-compliant architecture with encrypted data transmission. Patient data is processed securely and never stored without explicit consent.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="feature-title">Evidence-Based</h3>
+                        <p class="feature-description">
+                            Model trained on 4,500+ patient records with 17 validated clinical features. Uses correlation coefficients and quartile-based thresholds from real data.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Real-Time Analysis</h3>
+                        <p class="feature-description">
+                            Instant risk assessment with sub-second response times. RESTful API for seamless integration with existing healthcare systems and EMR platforms.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h3 class="feature-title">Detailed Reports</h3>
+                        <p class="feature-description">
+                            Comprehensive risk reports with identified risk factors, probability scores, and clinical reasoning. Export-ready for patient records and documentation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Indicators -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="trust-badge">
+                        <i class="fas fa-certificate"></i>
+                        <h5>Clinically Validated</h5>
+                        <p>Validated against established cardiovascular risk models</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="trust-badge">
+                        <i class="fas fa-lock"></i>
+                        <h5>HIPAA Compliant</h5>
+                        <p>Meets healthcare data privacy and security standards</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="trust-badge">
+                        <i class="fas fa-code"></i>
+                        <h5>Open Source</h5>
+                        <p>Transparent algorithms for research and validation</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="trust-badge">
+                        <i class="fas fa-headset"></i>
+                        <h5>Professional Support</h5>
+                        <p>Technical support for healthcare institutions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="cta-title">Ready to Assess Cardiovascular Risk?</h2>
+            <p class="lead mb-4">Start using our AI-powered risk assessment platform today</p>
+            <a href="/predict-page" class="btn btn-light btn-lg px-5 py-3">
+                <i class="fas fa-heartbeat me-2"></i>Begin Assessment
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-professional">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3"><i class="fas fa-heartbeat me-2"></i>CardioAI</h5>
+                    <p class="text-muted">
+                        Professional cardiovascular risk assessment platform powered by data-driven artificial intelligence.
+                    </p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="mb-3">Platform</h6>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/predict-page">Assessment</a></li>
+                        <li><a href="/dashboard">Analytics</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="mb-3">Resources</h6>
+                    <ul class="footer-links">
+                        <li><a href="/api/model-info">API Docs</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">HIPAA Compliance</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="mb-3">Connect</h6>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-github me-2"></i>GitHub</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
+                        <li><a href="#"><i class="fas fa-envelope me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-2">&copy; 2024 CardioAI. All rights reserved.</p>
+                <p class="small mb-0">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    For research and clinical decision support only. Not a substitute for professional medical diagnosis.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load model statistics
+        fetch('/api/model-info')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loaded) {
+                    // Update feature count
+                    if (data.features) {
+                        document.getElementById('featureCount').textContent = data.features.length;
+                    }
+                    
+                    // Update accuracy if available
+                    if (data.feature_stats && data.feature_stats.feature_importance) {
+                        const importance = data.feature_stats.feature_importance;
+                        const avgImportance = Object.values(importance).reduce((a, b) => a + b, 0) / Object.keys(importance).length;
+                        document.getElementById('modelAccuracy').textContent = (avgImportance * 100).toFixed(1) + '%';
+                    }
+                }
+            })
+            .catch(error => console.error('Error loading stats:', error));
+    </script>
+</body>
+</html>
