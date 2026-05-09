@@ -1,0 +1,23 @@
+CNN :- (Convolutional Neural Network)
+Why we need CNN?
+-> It helps with feature extraction.
+-> Automatically learns features from images.
+
+1. Convolution : sliding small matrix over image to extract features 
+                 and the small matrix is called convolutional kernal
+                 we use multiple filters for mutiple features.
+
+2. Activation function : Relu(Rectified linear unit)
+                         f(x)=Max(0,x)
+                         Leaky Relu : advance version 
+                            here instead of 0 we use a little bit negative values
+
+3. Pooling : Types(Max Pooling{also called down sampling} , Average Pooling{also called up sampling})
+            Method-> simply take out max or average value of that pool for max or average pooling.
+            Benifits-> 1.Reduce Computation
+                       2.Remove noise
+
+4. Flatten : convert 2D into 1D
+
+CNN Pipeline 
+    Image -> Convolution -> Relu -> Pooling -> Flatten -> Dense -> Output

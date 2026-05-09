@@ -1,0 +1,88 @@
+It is a dense vector representation of a word that captures meanings.
+
+
+Word2Vec is a technique in NLP tused to represent words as dense numerical vector. 
+It allows the machine to understand the  semantic relationship between words by positioning similar words together.
+
+In TF-TDF:
+It treats words as independent tokens.
+No semantic meanings.
+
+TF-IDF does not know:
+car=automobile
+laptop=electronic
+happy=joyful
+king=queen
+
+
+We need a way to represnt a word baesd on meaning not count.
+
+- We need a way to represent words based on meaning, not count
+
+- Core idea behind Word2Vec
+--- Words that appear in similar context have similar meaning 
+--- This is known as Distributional Hypothesis
+
+ Word2Vec Architecture
+- Two primary model architecture:
+    - CBOW
+    -Skip-Gram
+
+- CBOW
+    - Contiinuous bag of words 
+    - this model predicts a target word based on its surrounding context words. Generally fater for frequent words.
+    Example: Input: I am learning _____ intelligence.
+             Predict: artifical   
+
+- Skip-Gram
+    - using a single word to predict the surrounding context words. Generally faster for infrequent words.
+    Example: Input: intelligence
+             Predict: artifical, human, machine
+
+Why this creats meaning?
+If:b
+"happy" appears near joy, smile, fun
+"sad" appears near cry, depressed, pain
+Then:
+Vector positions become different 
+
+TF-IDF vs Word2Vec
+1.  TTF-IDF - Sparse 
+    Word2Vec - Dense
+2. TTF-IDF - Count based
+    Word2Vec - Context based
+3.  TTF-IDF - Independent words 
+    Word2Vec - Related word cluster
+
+Sparse matrix vs Dense Matrix
+1. Data Representation
+    Sparse - Contains mostly zero values 
+    Dense - Most values are meaningful, no-zero
+2. Storage Method:
+    Sparse - Only non-zero elements and their indices are stored, so significant memory 
+    Dense - Every element, including zero is stored explicitly as 2D array
+3. NLP Use case:
+    Sparse - Bag of words like TF-IDF 
+    Dense - word embedding like Word2Vec
+
+    Glove
+    Glove Vectors for word representation
+    -developed by Stanford University
+    - unlike Word2Vec (predictive model), Glove is: count based + matrix factorization model
+
+    It combines:
+    1.Statistical word co-occurence
+    2.Matrix factorization
+    3.Linear Algebra
+
+    Word2Vec learns embeddings by predicting context. But it:
+    -only usess local context window
+    -doesn't directly uses Global corpus
+
+    In order to use full global co-occurence statistics of the corpus , we have Glove
+
+    Main idea behind Glove is:
+    word to word co-occurence matrix
+
+    Common pretrained Glove vectors:
+    

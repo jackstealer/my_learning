@@ -1,0 +1,307 @@
+"""
+If-Else based Chatbot
+Basic NLP
+Text preprocessing
+Vectorization
+Logistic Regression
+Machine Learning from Scratch
+Save and load model
+Chat application with Streamlit
+
+Word Embeddings
+- Word2Vec
+- GloVe
+
+
+
+What is a Word Embedding ?
+- Dense vector representation of a word that captures meaning
+
+Word2Vec
+- Technique in NLP used to represent words as dense numerical vector
+- developed by Google in 2013
+- it allows machines to understand the semantic relationship between words by positioning similar words together
+
+In TF-IDF:
+- it treats words as independent tokens
+- no semantic understanding
+
+TF-IDF does not know:
+car = automobile
+laptop = electronic
+happy = joyful
+king = queen
+
+We need a way to represent words based on meaning, not count
+
+Core idea behind Word2Vec:
+- Words that appear in similar context have similar meanings
+- This is known as Distributional Hypothesis
+
+
+Word2Vec Architecture
+- Two primary model architecture:
+    - CBOW
+    - Skip-Gram
+
+CBOW - Continuous Bag of Words
+- this model predict a target word based on its surronding context words. Generally faster for frequent words.
+Input: I am learning _____ intelligence
+Predict: artificial
+
+Skip-Gram:
+- using a single word to predict the surronding context words. Generally faster for infrequent words
+Input: intelligence
+Predict: artificial, human, machine
+
+
+Why this creates meaning ?
+If:
+"happy" appears near joy, smile, fun
+"sad" appears near cry, depressed, pain
+Then:
+Vector positions become different
+
+
+TF-IDF vs Word2Vec
+1.  TF-IDF - Sparse
+    Word2Vec - Dense
+2.  TF-IDF - Count based
+    Word2Vec - Context based
+3.  TF-IDF - Independent words
+    Word2Vec - Related word cluster
+
+
+Sparse Matrix vs Dense Matrix
+1. Data Representation:
+Sparse - Contains mostly zero values
+Dense - Most values are meaningful, non-zero
+2. Storage Method:
+Sparse - Only non-zero elements and their indices are stored, so significant memory
+Dense - Every element, including zero is stored explicitly as 2D array
+3. NLP Use case:
+Sparse - Bag of words like TF-IDF
+Dense - word embeddings like Word2Vec
+
+=======================
+
+GloVe
+Global Vectors for Word Representation
+- developed by Stanford University
+- Unlike Word2Vec (predictive model), GloVe is: count based + matrix factorization model
+
+It combines:
+1. Statistical word co-occurence
+2. Matrix factorization
+3. Linear Algebra
+
+Word2Vec learns embeddings by predicting context. But it:
+- only uses local context window
+- doesn't directly uses global corpus
+
+In order to use full global co-occurence statistics of the corpus, we have GloVe
+
+Main idea behind GloVe is:
+Word-Word co-occurence matrix
+
+Common pretrained GloVe vectors:
+1. glove-wiki-gigaword-50
+2. glove-wiki-gigaword-100
+3. glove-wiki-gigaword-300
+4. glove-twitter-200
+
+==================================
+
+Window Based Modelling
+- As of now we know about word embeddings
+- Embedding give meaning, but models still need context window to make predictions....
+
+Word -> vector (meaning)
+
+NLP tasks are rarely about one single word
+They are actually about surronding words
+So it uses a window
+
+Window is a fixed number of words around a target word
+Example:
+I love machine learning models
+let window_size = 2 
+Target word = machine
+Context window = love machine learning
+
+We are using these vectors to predict something...
+
+Limitation of Window Models:
+1. Fixed window - limited context
+2. Cannot capture long dependency
+
+Example:
+I am from France and I speak fluent _______
+
+That's why we need memory
+
+Embedding -> Window Context -> Need Memory
+= RNN - Recurrent Neural Network
+
+Why RNN?
+Example: I did not like this movie.
+["I","did","not","like","this","movie"] - treated independently
+
+Core problem is: Language is sequential + context dependent
+
+RNN introduces memory of previous words
+-- Instead of processing whole sentence at once, RNN processes one word at a time: 
+x1 -> x2 -> x3 -> x4
+At each step: 
+-It remembers past information
+
+Step by Step RNN Algo:
+Step 1. Initialize Memory: 
+	memory = empty
+#memory is called hidden state
+
+Step 2. Read first word:
+	Input: "I"
+	RNN reads "I"
+	updates the memory
+	memory= understanding of "I"
+
+Step 3. Read next word:
+	Input: "did"
+	Updates the memory
+	previous memory="I"
+	current word="did"
+	Then it combines both:
+	memory="I did"
+
+Continue processing till last word...
+"like"- it is positive
+But memory also contains "not"
+
+memory=negative sentiment
+
+Algorithm:
+1. Start with empty memory
+2. For each word in the sentence:
+  -read the word
+  -combine it with previous word
+  -update memory
+3. After last word: 
+  -Use memory to make prediction
+
+new memory = old memory + new word
+
+Formula: h(t) = f(h(t-1), x(t))
+Formula : h(t) = activation(W * h(t-1) + U * x(t) + b)
+Memory Formula : h(t) = tanh(Wx Xt + Wh(sharing) h(t-1) + b(bias))
+
+Same weights (Wx, Wh) are shared across all time steps
+This is called weight sharing
+
+Summary of RNN:
+1. RNN is a type of neural network designed for (handle) sequential data.
+2. It maintains a hidden state (memory) that captures information from previous time steps.
+3. RNN processes input one word at a time, updating its hidden state based on the current input and the previous hidden state.
+4. The hidden state is updated using a non-linear activation function (like tanh) and shared weights across time steps.
+5. Works for text, speech, video, time series data, etc.
+
+Limitations of RNN:
+1.Cannont handle long-term dependencies due to vanishing gradient problem
+2. Training can be slow due to sequential processing
+
+Solutions to RNN Limitations:
+1. LSTM (Long Short-Term Memory)
+2. GRU (Gated Recurrent Unit)
+
+Types of RNN:
+1. One to One: Input and output are single elements (e.g. image classification)
+2. One to Many: Single input produces a sequence of outputs (e.g. image captioning)
+3. Many to One: Sequence of inputs produces a single output (e.g. sentiment analysis)
+4. Many to Many: Sequence of inputs produces a sequence of outputs (e.g. machine translation)
+
+Key architecture of RNN:
+- Standard RNN often struggle with the "vanishing gradient problem" where they forgot information from distant past.
+- That is why we need advanced variants of RNN that uses Gatinng mechanism:
+1. LSTM (Long Short-Term Memory)
+2. GRU (Gated Recurrent Unit)
+3. Bi-directional RNN
+4. Deep RNN
+
+BPTT - Backpropagation Through Time
+- To understand BPTT, think of RNN as a standard deep neural network unrolled across time steps. Each time step corresponds to a layer in the deep network. Because the same weights are shared across these layers, the gradients must account for entire history of sequence ....
+
+1. Forward Pass / Feedforward:
+- at every time step, network will perform  two main calculations:
+i. Hidden State: Updated using the current input and previous hidden state
+ Compute hidden state: h(t) = f(h(t-1), x(t))
+ii. Output: Generate output based on the current hidden state
+ Compute output: y(t) = g(h(t))
+
+ 2.Total Loss:
+  - the total loss for a sequence is the sum of losses at each time step:
+  Total Loss = L(y(1), target(1)) + L(y(2), target(2)) + ... + L(y(T), target(T))
+
+  3. Gradient Challenge:
+  - To update weights, we need partial derivatives , using the chain rule we sum the contiribution of W at every step.
+  For a specific step t, the gradient depends on current state ht, which is in turn depends on ht-1, which depends on ht-2, and so on. This creates a long chain multiplication and dependencies that can lead to vanishing or exploding gradients.
+  
+  4. vainshing Gradient Problem:
+  - if the weights are smal. mutiplying them repeatedly causes the gradient to shrink exponentially, making it difficult for the network to learn long-term dependencies.
+  - if the weights are large, multiplying them repeatedly causes the gradient to grow exponentially, leading to unstable training.
+
+  =============================================================================================================
+  
+  LSTM- Long short term memory
+  Example: I was watching a movie yesterday with my friends and after a long discussion
+  we realized that movie was bad.
+
+  Important word: Bad
+  but it appears very late so RNN may forget it.
+
+  RNN Problems:
+  memory get weaker as sequence grow
+
+  What LSTM does"
+  - what to remember
+  - what to forget
+  - what to output
+
+  LSTM are design in such a way that avoids long-term dependencies.
+  Remembering information for long period of time is practically their default behaviour.
+
+  Three gates in LSTM:
+  1. Forget gate: decides what to remove from memory
+  2. Input gate: decides what new information to store
+  3. Output gate: decides what to use for prediction
+
+  Example: I went to the movie yesterday.
+  Word "yesterday" may not matter later -> forget
+
+  Example: The movie was amazing.
+  Store "amazing" -> important sentiment
+
+  Step by step LSTM algorithm
+
+  Step 1: Intialize memory
+    memory= empty
+
+  Step 2: Read first word
+  "I" -> Not important => weak memory
+
+  Step 3: "did"(next word)
+  Memory updated slightly
+
+  Step 4: "not" (next word)
+  Important word - input gate -> store "not"
+
+  Step 5: "like" (next word)
+  Now "like" ->positive
+  but: "not" ->negative
+  LSTM commbine : final meaning = negative
+
+  LSTM architecture breakdown
+  Step-1:
+  -decide what information we're going to throw away from cell state
+  -decision is being made by sigmoid layer know as "forget gate layer"
+  -it looks at ht-1
+ """
