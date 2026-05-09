@@ -1,43 +1,47 @@
+# 🧠 My Learning Journey
 
-# Multimodal Intelligence System
+A personal repository where I document my day-to-day progress in **Artificial Intelligence**, **Machine Learning**, and **Data Science**.
 
-A scalable AI system that integrates Text and Vision APIs to enable contextual reasoning, image understanding, and intelligent automation workflows.
-
-## Overview
-
-This project demonstrates how multimodal AI systems can process and reason over both textual and visual inputs. The system is designed to support:
-
-- Image understanding and captioning
-- Visual question answering
-- Text-based contextual reasoning
-- Document + image analysis
-- Intelligent automation pipelines
-
-The goal is to build production-ready AI workflows combining computer vision and natural language processing.
+This is not a polished product — it's a living record of experiments, notes, and projects built as I learn.
 
 ---
 
-##  Core Features
+## 📌 What's Inside
 
-- 🔍 Image Analysis using Vision API
-- 📝 Text Processing using LLM API
-- 🔄 Multimodal Context Fusion
-- 📊 Structured Output Generation
-- ⚡ API-based Modular Architecture
+This repo covers a range of topics I've been exploring, including:
+
+- **Machine Learning** — algorithms, regression, classification, and model evaluation
+- **Deep Learning** — neural networks, RNNs, and hands-on implementations
+- **Computer Vision** — image processing, CNNs, face detection, and real-time filters
+- **Natural Language Processing** — text preprocessing, embeddings, and chatbots
+- **Generative AI** — experimenting with LLMs and HuggingFace models
+- **Mini Projects** — small end-to-end apps built to apply what I've learned
 
 ---
 
-## 🏗️ Architecture
+## 🎯 Purpose
 
-User Input (Text / Image)
-        ↓
-Preprocessing Layer
-        ↓
-Vision API  →  Feature Extraction
-Text API    →  Context Understanding
-        ↓
-Multimodal Fusion Layer
-        ↓
-Response Generation Engine
-        ↓
-Structured Output
+> *"Learn by doing."*
+
+Every notebook, script, and project here represents something I built while learning. The goal is to strengthen my understanding through practice — not just theory.
+
+---
+
+## 🛠️ Tools & Technologies
+
+- Python, Jupyter Notebook
+- Scikit-learn, TensorFlow, Keras
+- OpenCV, MediaPipe
+- NLTK, Gensim, HuggingFace Transformers
+- Flask, Streamlit
+- Pandas, NumPy, Matplotlib
+
+---
+
+## 📬 Connect
+
+- **GitHub**: [jackstealer](https://github.com/jackstealer)
+
+---
+
+> *This repo grows as I grow. Check back often!* 🚀
