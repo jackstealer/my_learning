@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioAI - Professional Heart Disease Risk Assessment</title>
+    <meta name="description" content="Advanced AI-powered cardiovascular risk assessment platform for healthcare professionals">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0891b2;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0284c7;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .btn-gradient:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .model-status {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .status-loaded {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-not-loaded {
+            background: var(--danger);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-heartbeat"></i> Heart Disease AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/predict-page">Predict</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold mb-4">AI-Powered Heart Disease Prediction</h1>
+                    <p class="lead mb-4">Advanced deep learning system for early detection and risk assessment of cardiovascular diseases</p>
+                    
+                    <div class="mb-4">
+                        <span class="model-status {% if model_loaded %}status-loaded{% else %}status-not-loaded{% endif %}">
+                            {% if model_loaded %}
+                                <i class="fas fa-check-circle"></i> Model Ready
+                            {% else %}
+                                <i class="fas fa-exclamation-circle"></i> Model Not Loaded
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="d-flex gap-3">
+                        <a href="/predict-page" class="btn btn-gradient btn-lg">
+                            <i class="fas fa-stethoscope"></i> Start Prediction
+                        </a>
+                        <a href="/dashboard" class="btn btn-light btn-lg">
+                            <i class="fas fa-chart-line"></i> View Analytics
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-heart-pulse" style="font-size: 15rem; opacity: 0.9;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4" id="statsContainer">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="modelAccuracy">--</div>
+                        <p class="text-muted mb-0">Model Accuracy</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="featureCount">--</div>
+                        <p class="text-muted mb-0">Risk Factors</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="modelCount">--</div>
+                        <p class="text-muted mb-0">AI Models</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="rocAuc">--</div>
+                        <p class="text-muted mb-0">ROC-AUC Score</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Powerful Features</h2>
+                <p class="lead text-muted">Advanced AI technology for accurate health predictions</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Deep Learning</h4>
+                            <p class="text-muted">Neural network trained on thousands of patient records for accurate predictions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4>Real-time Analysis</h4>
+                            <p class="text-muted">Instant risk assessment with probability scores and detailed insights</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Secure & Private</h4>
+                            <p class="text-muted">Your health data is encrypted and never stored without consent</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4>Visual Analytics</h4>
+                            <p class="text-muted">Interactive dashboards with comprehensive health insights</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Mobile Friendly</h4>
+                            <p class="text-muted">Access from any device - desktop, tablet, or smartphone</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h4>Expert Validated</h4>
+                            <p class="text-muted">Model validated by healthcare professionals and data scientists</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">How It Works</h2>
+                <p class="lead text-muted">Simple 3-step process for heart disease risk assessment</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                            1
+                        </div>
+                        <h4>Enter Health Data</h4>
+                        <p class="text-muted">Provide basic health information and lifestyle factors</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                            2
+                        </div>
+                        <h4>AI Analysis</h4>
+                        <p class="text-muted">Deep learning model analyzes your data in real-time</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                            3
+                        </div>
+                        <h4>Get Results</h4>
+                        <p class="text-muted">Receive detailed risk assessment and recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+        <div class="container text-center text-white">
+            <h2 class="display-5 fw-bold mb-4">Ready to Check Your Heart Health?</h2>
+            <p class="lead mb-4">Get instant AI-powered risk assessment in seconds</p>
+            <a href="/predict-page" class="btn btn-light btn-lg">
+                <i class="fas fa-heartbeat"></i> Start Free Assessment
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 Heart Disease AI Prediction System | Powered by Deep Learning</p>
+            <p class="small text-muted">For educational and research purposes only. Not a substitute for professional medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load dynamic stats from API
+        fetch('/api/model-info')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loaded && data.metrics) {
+                    const metrics = data.metrics.best_model_metrics || data.metrics;
+                    
+                    // Update stats with real data
+                    document.getElementById('modelAccuracy').textContent = 
+                        (metrics.accuracy * 100).toFixed(1) + '%';
+                    document.getElementById('featureCount').textContent = 
+                        data.features ? data.features.length : '--';
+                    document.getElementById('modelCount').textContent = 
+                        data.available_models ? data.available_models.length : '--';
+                    document.getElementById('rocAuc').textContent = 
+                        metrics.roc_auc ? (metrics.roc_auc * 100).toFixed(1) + '%' : '--';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading stats:', error);
+            });
+    </script>
+</body>
+</html>

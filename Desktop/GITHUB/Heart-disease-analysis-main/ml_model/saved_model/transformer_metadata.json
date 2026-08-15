@@ -1,0 +1,288 @@
+{
+    "feature_names": [
+        "BMI",
+        "Smoking",
+        "AlcoholDrinking",
+        "Stroke",
+        "PhysicalHealth",
+        "MentalHealth",
+        "DiffWalking",
+        "Sex",
+        "AgeCategory",
+        "Race",
+        "Diabetic",
+        "PhysicalActivity",
+        "GenHealth",
+        "SleepTime",
+        "Asthma",
+        "KidneyDisease",
+        "SkinCancer"
+    ],
+    "feature_stats": {
+        "BMI": {
+            "type": "numeric",
+            "min": 12.48,
+            "max": 75.82,
+            "mean": 29.34004,
+            "std": 6.676625290570271,
+            "median": 28.25,
+            "q25": 24.6875,
+            "q75": 33.0
+        },
+        "Smoking": {
+            "type": "categorical",
+            "unique_values": [
+                "Yes",
+                "No"
+            ],
+            "value_counts": {
+                "No": 2571,
+                "Yes": 1929
+            },
+            "most_common": "No"
+        },
+        "AlcoholDrinking": {
+            "type": "categorical",
+            "unique_values": [
+                "No",
+                "Yes"
+            ],
+            "value_counts": {
+                "No": 4291,
+                "Yes": 209
+            },
+            "most_common": "No"
+        },
+        "Stroke": {
+            "type": "categorical",
+            "unique_values": [
+                "No",
+                "Yes"
+            ],
+            "value_counts": {
+                "No": 4249,
+                "Yes": 251
+            },
+            "most_common": "No"
+        },
+        "PhysicalHealth": {
+            "type": "numeric",
+            "min": 0.0,
+            "max": 30.0,
+            "mean": 4.105111111111111,
+            "std": 8.573742752137498,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 3.0
+        },
+        "MentalHealth": {
+            "type": "numeric",
+            "min": 0.0,
+            "max": 30.0,
+            "mean": 4.439777777777778,
+            "std": 8.593363404038103,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 5.0
+        },
+        "DiffWalking": {
+            "type": "categorical",
+            "unique_values": [
+                "No",
+                "Yes"
+            ],
+            "value_counts": {
+                "No": 3628,
+                "Yes": 872
+            },
+            "most_common": "No"
+        },
+        "Sex": {
+            "type": "categorical",
+            "unique_values": [
+                "Female",
+                "Male"
+            ],
+            "value_counts": {
+                "Female": 2604,
+                "Male": 1896
+            },
+            "most_common": "Female"
+        },
+        "AgeCategory": {
+            "type": "categorical",
+            "unique_values": [
+                "55-59",
+                "80 or older",
+                "65-69",
+                "75-79",
+                "40-44",
+                "70-74",
+                "60-64",
+                "50-54",
+                "45-49",
+                "18-24",
+                "35-39",
+                "30-34",
+                "25-29"
+            ],
+            "value_counts": {
+                "65-69": 537,
+                "60-64": 469,
+                "70-74": 439,
+                "55-59": 394,
+                "50-54": 388,
+                "75-79": 320,
+                "45-49": 314,
+                "80 or older": 310,
+                "40-44": 299,
+                "35-39": 271,
+                "30-34": 269,
+                "18-24": 267,
+                "25-29": 223
+            },
+            "most_common": "65-69"
+        },
+        "Race": {
+            "type": "categorical",
+            "unique_values": [
+                "White",
+                "Black",
+                "Asian",
+                "American Indian/Alaskan Native",
+                "Other",
+                "Hispanic"
+            ],
+            "value_counts": {
+                "White": 3171,
+                "Black": 1088,
+                "Other": 86,
+                "Hispanic": 71,
+                "American Indian/Alaskan Native": 51,
+                "Asian": 33
+            },
+            "most_common": "White"
+        },
+        "Diabetic": {
+            "type": "categorical",
+            "unique_values": [
+                "Yes",
+                "No",
+                "No, borderline diabetes",
+                "Yes (during pregnancy)"
+            ],
+            "value_counts": {
+                "No": 3612,
+                "Yes": 767,
+                "No, borderline diabetes": 84,
+                "Yes (during pregnancy)": 37
+            },
+            "most_common": "No"
+        },
+        "PhysicalActivity": {
+            "type": "categorical",
+            "unique_values": [
+                "Yes",
+                "No"
+            ],
+            "value_counts": {
+                "Yes": 3231,
+                "No": 1269
+            },
+            "most_common": "Yes"
+        },
+        "GenHealth": {
+            "type": "categorical",
+            "unique_values": [
+                "Very good",
+                "Fair",
+                "Good",
+                "Poor",
+                "Excellent"
+            ],
+            "value_counts": {
+                "Good": 1427,
+                "Very good": 1416,
+                "Excellent": 728,
+                "Fair": 670,
+                "Poor": 259
+            },
+            "most_common": "Good"
+        },
+        "SleepTime": {
+            "type": "numeric",
+            "min": 1.0,
+            "max": 20.0,
+            "mean": 7.043333333333333,
+            "std": 1.5957649831059024,
+            "median": 7.0,
+            "q25": 6.0,
+            "q75": 8.0
+        },
+        "Asthma": {
+            "type": "categorical",
+            "unique_values": [
+                "Yes",
+                "No"
+            ],
+            "value_counts": {
+                "No": 3857,
+                "Yes": 643
+            },
+            "most_common": "No"
+        },
+        "KidneyDisease": {
+            "type": "categorical",
+            "unique_values": [
+                "No",
+                "Yes"
+            ],
+            "value_counts": {
+                "No": 4291,
+                "Yes": 209
+            },
+            "most_common": "No"
+        },
+        "SkinCancer": {
+            "type": "categorical",
+            "unique_values": [
+                "Yes",
+                "No"
+            ],
+            "value_counts": {
+                "No": 3927,
+                "Yes": 573
+            },
+            "most_common": "No"
+        },
+        "feature_importance": {
+            "AgeCategory": 0.2403961901243489,
+            "DiffWalking": 0.2259618647530078,
+            "Diabetic": 0.20984905774807994,
+            "Stroke": 0.20665313247188644,
+            "PhysicalHealth": 0.18576340624684903,
+            "KidneyDisease": 0.13156950586946836,
+            "Smoking": 0.11888882525694365,
+            "PhysicalActivity": 0.10816331808880879,
+            "SkinCancer": 0.09152690209977275,
+            "Sex": 0.07632636663125829,
+            "Asthma": 0.04715154595001254,
+            "Race": 0.041673464504261896,
+            "MentalHealth": 0.03773135074977557,
+            "AlcoholDrinking": 0.02876739692905747,
+            "GenHealth": 0.020765158248122282,
+            "BMI": 0.019889446998825343,
+            "SleepTime": 0.008580360625455285
+        },
+        "risk_thresholds": {
+            "low": 0.0537,
+            "medium": 0.1073,
+            "high": 0.2147
+        }
+    },
+    "model_info": {
+        "name": "Heart Disease Prediction - Data-Driven System",
+        "type": "Intelligent Rule-Based with Statistical Thresholds",
+        "source": "Trained on Heart_new2.csv"
+    }
+}
